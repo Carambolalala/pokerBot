@@ -33,10 +33,10 @@ while True:
         FlashDro, FlashSuit = analyse.handFlashDro(Hand, BoardCards)
         if FlashDro != 'flashdro':
             Scare += analyse.boardFlashDro(BoardCards)
-    if HandCombination != 'street':
+    if HandCombination != 'street' and HandCombination != 'flash':
         StreetDro, StreetCards = analyse.handStreetDro(Hand, BoardCards)
         if StreetDro != 'streetdro' or StreetDro != 'minstreetdro':
-            Scare += analyse.boardFlashDro(BoardCards)
+            Scare += analyse.boardStreetDro(BoardCards)
     Dro = FlashDro + StreetDro
     Outs = analyse.outsCount(HandCombination, Dro)
 
