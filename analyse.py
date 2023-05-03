@@ -1,4 +1,15 @@
 from data.picturePower import picturePower, picturePowerRev
+
+#Универсальные функции
+def rowForStreet(Card, countCard):
+    rowOfCard = []
+    for p in range(countCard):
+        try:
+            rowOfCard.append(int(Card[p*2]))
+        except Exception:
+            rowOfCard.append(picturePower[Card[p*2]])
+    return rowOfCard
+
 #Функции анализа
 # Префлоп
 def cardCategory(Hand): #Анализирует категорию стартовой руки
@@ -84,18 +95,11 @@ def flopHandCombination(HandCard, BoardCard, HandCombination): #Находит �
     elif r == 3:
         returnCombination += 'kare'
 
-    rowOfCard = []
     mbStreetFlash = ''
-    for p in range(3):
-        try:
-            rowOfCard.append(int(BoardCard[p*2]))
-        except Exception:
-            rowOfCard.append(picturePower[BoardCard[p*2]])
-    for p in range(2):
-        try:
-            rowOfCard.append(int(HandCard[p*2]))
-        except Exception:
-            rowOfCard.append(picturePower[HandCard[p*2]])
+    rowOfCard = rowForStreet(BoardCard, 3)
+    rowOfHandCard = rowForStreet(HandCard, 2)
+    for el in rowOfHandCard:
+        rowOfCard.append(el)
     rowOfCard.sort()
     i = 1
     while i <= 4:
@@ -131,18 +135,24 @@ def boardFlashDro(BoardCard):
         return 'flash'
     return ''
 
+def boardStreetDro(BoardCard):
+    rowOfCard = rowForStreet(BoardCard, 3)
+    p = 0
+    r = 0
+    for el in rowOfCard:
+        if p != 0:
+            if el - rowOfCard[p-1] == 1:
+                r += 1
+        p += 1
+    if r == 2:
+        return 'street'
+    return ''
+
 def handStreetDro(HandCard, BoardCard):
-    rowOfCard = []
-    for p in range(3):
-        try:
-            rowOfCard.append(int(BoardCard[p*2]))
-        except Exception:
-            rowOfCard.append(picturePower[BoardCard[p*2]])
-    for p in range(2):
-        try:
-            rowOfCard.append(int(HandCard[p*2]))
-        except Exception:
-            rowOfCard.append(picturePower[HandCard[p*2]])
+    rowOfCard = rowForStreet(BoardCard, 3)
+    rowOfHandCard = rowForStreet(HandCard, 2)
+    for el in rowOfHandCard:
+        rowOfCard.append(el)
     rowOfCard.sort()
     i = 0
     r_1 = 0

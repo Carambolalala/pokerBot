@@ -5,13 +5,13 @@ from getParameters import getData
 import analyse
 
 #доПрефлоп
-#Blind = getData.blind() # float
-#Bank = getData.bank() # float
+Blind = getData.blind() # float
+Bank = getData.bank() # float
 
 #ОСНОВНОЙ ЦИКЛ ИГРЫ
 while True:
     # Префлоп - ПЕРЕПИСАТЬ НА СЛУЧАЙ РЕРЕЙЗА ИЛИ РЕЙЗА ПОСЛЕ НАС
-    #Players = getData.players() # int
+    Players = getData.players() # int
     Position = getData.position() #int
     Hand = getData.startHand() # str
     OpponentOptions = getData.opponentOptions() # str 'R' - raise, 'F' - all fold, 'C' - some call
@@ -23,6 +23,7 @@ while True:
     print('#######################################################')
     
     # Флоп
+    Scare = ''
     BoardCards = getData.flopCards() # str
     FlopBoardCombination = analyse.flopBoardCombination(BoardCards)
     HandCombination = analyse.flopHandCombination(Hand, BoardCards, HandCombination)
@@ -30,13 +31,15 @@ while True:
         HandCombination += FlopBoardCombination
     if HandCombination != 'flash':
         FlashDro, FlashSuit = analyse.handFlashDro(Hand, BoardCards)
+        if FlashDro != 'flashdro':
+            Scare += analyse.boardFlashDro(BoardCards)
     if HandCombination != 'street':
         StreetDro, StreetCards = analyse.handStreetDro(Hand, BoardCards)
-    if HandCombination == 'street':
-        Scare = analyse.boardFlashDro(BoardCards)
+        if StreetDro != 'streetdro' or StreetDro != 'minstreetdro':
+            Scare += analyse.boardFlashDro(BoardCards)
     Dro = FlashDro + StreetDro
     Outs = analyse.outsCount(HandCombination, Dro)
-    
+
     OpponentOptions = getData.opponentOptions() # str 'R' - raise, 'F' - all fold, 'C' - some call, 'Ch' - check
 
 
