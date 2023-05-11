@@ -2,19 +2,19 @@
 #EP - ранняя позиция, МР - средняя позиция, LP - поздняя позиция
 comboStartHand = {
     'highDouble': { #Старшие пары
-        'F': {
+        'Fold': {
             'EP': 'Raise',
             'MP': 'Raise',
             'LP': 'Raise',
             'Blind': 'Raise' 
         },
-        'C': {
+        'Call': {
             'EP': 'Raise',
             'MP': 'Raise',
             'LP': 'Raise',
             'Blind': 'Raise'
         },
-        'R': {
+        'Raise': {
             'EP': 'Raise',
             'MP': 'Raise',
             'LP': 'Raise',
@@ -22,19 +22,19 @@ comboStartHand = {
         }
     },
     'middleDouble': { #Средние пары
-        'F': {
+        'Fold': {
             'EP': 'Raise',
             'MP': 'Raise',
             'LP': 'Raise',
             'Blind': 'Raise' 
         },
-        'C': {
+        'Call': {
             'EP': 'Raise',
             'MP': 'Raise',
             'LP': 'Raise',
             'Blind': 'Raise'
         },
-        'R': {
+        'Raise': {
             'EP': 'Call20',
             'MP': 'Call20',
             'LP': 'Call20',
@@ -42,19 +42,19 @@ comboStartHand = {
         }
     },
     'juniorDouble': { #Младшие пары
-        'F': {
-            'EP': 'Fold',
+        'Fold': {
+            'EP': 'Call',
             'MP': 'Call',
             'LP': 'Raise',
             'Blind': 'Call' 
         },
-        'C': {
-            'EP': 'Fold',
+        'Call': {
+            'EP': 'Call',
             'MP': 'Call',
             'LP': 'Call',
             'Blind': 'Call'
         },
-        'R': {
+        'Raise': {
             'EP': 'Call20',
             'MP': 'Call20',
             'LP': 'Call20',
@@ -62,19 +62,19 @@ comboStartHand = {
         }
     },
     'highAces': { #Сильные тузы
-        'F': {
+        'Fold': {
             'EP': 'Raise',
             'MP': 'Raise',
             'LP': 'Raise',
             'Blind': 'Raise' 
         },
-        'C': {
+        'Call': {
             'EP': 'Raise',
             'MP': 'Raise',
             'LP': 'Raise',
             'Blind': 'Raise'
         },
-        'R': {
+        'Raise': {
             'EP': 'Raise',
             'MP': 'Raise',
             'LP': 'Raise',
@@ -82,39 +82,39 @@ comboStartHand = {
         }
     },
     'middleAces': { #Средние тузы
-        'F': {
-            'EP': 'Fold',
+        'Fold': {
+            'EP': 'Call',
             'MP': 'Raise',
             'LP': 'Raise',
             'Blind': 'Raise' 
         },
-        'C': {
-            'EP': 'Fold',
-            'MP': 'Fold',
+        'Call': {
+            'EP': 'Call',
+            'MP': 'Call',
             'LP': 'Raise',
             'Blind': 'Call'
         },
-        'R': {
-            'EP': 'Fold',
-            'MP': 'Fold',
-            'LP': 'Fold',
-            'Blind': 'Fold'
+        'Raise': {
+            'EP': 'Call20',
+            'MP': 'Call20',
+            'LP': 'Call20',
+            'Blind': 'Call20'
         }
     },
     'juniorAcesSuited': { #Малые одномастные тузы
-        'F': {
-            'EP': 'Fold',
-            'MP': 'Fold',
+        'Fold': {
+            'EP': 'Call',
+            'MP': 'Call',
             'LP': 'Raise',
             'Blind': 'Raise' 
         },
-        'C': {
-            'EP': 'Fold',
-            'MP': 'Fold',
+        'Call': {
+            'EP': 'Call',
+            'MP': 'Call',
             'LP': 'Call',
             'Blind': 'Call'
         },
-        'R': {
+        'Raise': {
             'EP': 'Fold',
             'MP': 'Fold',
             'LP': 'Fold',
@@ -122,79 +122,79 @@ comboStartHand = {
         }
     },
     'picturesSuited': { #Одномастные картинки
-        'F': {
-            'EP': 'Fold',
-            'MP': 'Fold',
+        'Fold': {
+            'EP': 'Call',
+            'MP': 'Call',
             'LP': 'Raise',
             'Blind': 'Raise' 
         },
-        'C': {
-            'EP': 'Fold',
+        'Call': {
+            'EP': 'Call',
             'MP': 'Call',
             'LP': 'Call',
             'Blind': 'Call'
         },
-        'R': {
-            'EP': 'Fold',
-            'MP': 'Fold',
-            'LP': 'Fold',
-            'Blind': 'Fold'
+        'Raise': {
+            'EP': 'Call20',
+            'MP': 'Call20',
+            'LP': 'Call20',
+            'Blind': 'Call20'
         }
     },
     'picturesOfsuited': { #Разномастные картинки
-        'F': {
-            'EP': 'Fold',
-            'MP': 'Fold',
+        'Fold': {
+            'EP': 'Call',
+            'MP': 'Call',
             'LP': 'Raise',
             'Blind': 'Raise' 
         },
-        'C': {
-            'EP': 'Fold',
-            'MP': 'Fold',
-            'LP': 'Fold',
-            'Blind': 'Call'
-        },
-        'R': {
-            'EP': 'Fold',
-            'MP': 'Fold',
-            'LP': 'Fold',
-            'Blind': 'Fold'
-        }
-    },
-    'connectorSuited': { #Одномастные коннекторы
-        'F': {
-            'EP': 'Fold',
-            'MP': 'Fold',
-            'LP': 'Raise',
-            'Blind': 'Raise' 
-        },
-        'C': {
-            'EP': 'Fold',
+        'Call': {
+            'EP': 'Call',
             'MP': 'Call',
             'LP': 'Call',
             'Blind': 'Call'
         },
-        'R': {
-            'EP': 'Fold',
-            'MP': 'Fold',
-            'LP': 'Fold',
-            'Blind': 'Fold'
+        'Raise': {
+            'EP': 'Call20',
+            'MP': 'Call20',
+            'LP': 'Call20',
+            'Blind': 'Call20'
         }
     },
-    'foldHand': { #Одномастные коннекторы
-        'F': {
+    'connectorSuited': { #Одномастные коннекторы
+        'Fold': {
+            'EP': 'Call',
+            'MP': 'Call',
+            'LP': 'Raise',
+            'Blind': 'Raise' 
+        },
+        'Call': {
+            'EP': 'Call',
+            'MP': 'Call',
+            'LP': 'Call',
+            'Blind': 'Call'
+        },
+        'Raise': {
+            'EP': 'Call20',
+            'MP': 'Call20',
+            'LP': 'Call20',
+            'Blind': 'Call20'
+        }
+    },
+    'foldHand': {
+        'Fold': {
             'EP': 'Fold',
             'MP': 'Fold',
             'LP': 'Fold',
-            'Blind': 'Fold' 
+            'Blind': 'Call' 
         },
-        'C': {
+        'Call': {
             'EP': 'Fold',
             'MP': 'Fold',
             'LP': 'Fold',
-            'Blind': 'Fold'
+            'Blind': 'Call'
         },
-        'R': {
+        'Raise': {
             'EP': 'Fold',
             'MP': 'Fold',
             'LP': 'Fold',

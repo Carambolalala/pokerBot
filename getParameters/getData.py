@@ -9,6 +9,8 @@ def Raise():
     return float(input('Raise before: '))
 def opponentOptions():
     return input('Opponent options: ')
+def pot():
+    return float(input('Pot: '))
 
 #Префлоп
 def players():

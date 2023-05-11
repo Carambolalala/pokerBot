@@ -1,3 +1,3 @@
-from analyse import handFlashDro
-a, b = handFlashDro('AfFf', 'AfDcDf')
-print(a, b)
+from analyse import handCombination
+
+print(handCombination('KsQc', 'JsTd4hAd', '', 4))
