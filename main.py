@@ -80,7 +80,7 @@ while True:
     if FoldOption:
         continue
     # Флоп
-    BoardCards = getData.flopCards() # str
+    BoardCards = getData.newCard('Flop') # str
     while True:
         Bank, Option = flopTernRiver(Hand, Bank, BoardCards, 3, 'Tern', Distance)
         print('Required option: ', Option)
@@ -94,7 +94,7 @@ while True:
         continue
         
     # Терн
-    NewCard = getData.ternRiverCard()
+    NewCard = getData.newCard('Tern')
     BoardCards += NewCard
     while True:
         Bank, Option = flopTernRiver(Hand, Bank, BoardCards, 4, 'River', Distance)
@@ -109,7 +109,7 @@ while True:
         continue
 
     # Ривер
-    NewCard = getData.ternRiverCard()
+    NewCard = getData.newCard('River')
     BoardCards += NewCard
     while True:
         Bank, Option = flopTernRiver(Hand, Bank, BoardCards, 5, '', Distance)

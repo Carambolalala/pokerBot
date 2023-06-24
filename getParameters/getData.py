@@ -4,6 +4,70 @@ from PIL import Image, ImageDraw
 pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
 from fromWindow.winAutoTest import screen
 from time import sleep
+
+#Вспомогательные функции
+def medium(pixels):
+    summary = 0
+    for line in pixels:
+        for column in line:
+            summary += column
+    return summary / 64
+
+def hashSum(card):
+    hashSuma = 0
+    for line in card:
+        for column in line:
+            if column == 255:
+                hashSuma += 1
+    return hashSuma
+
+def hashCard(x, y, x_, y_, board):
+    card = board[y:y_, x:x_]
+    angle = 1.3
+    #if rotate:
+    #    (h, w) = card.shape[:2]
+    #    center = (w / 2, h / 2)
+    #    M = cv2.getRotationMatrix2D(center, 4, 1.0)
+    #    card = cv2.warpAffine(card, M, (w, h))
+    card = cv2.resize(card, (8, 8))
+    thresh = medium(card)
+    card = cv2.threshold(card, thresh, 255, cv2.THRESH_BINARY)[1]
+    hashSuma = hashSum(card)
+    return card, hashSuma
+
+def checkBoardCard(x, y, x_, y_, boardCards, boardCardsSuit, hand=False):
+    card, hashSuma = hashCard(x, y, x_, y_, boardCards)
+    px = boardCardsSuit.load()
+    sliced = False
+    if hand == False:
+        if hashSuma == 25 or hashSuma == 24:
+            slicedCard = card[0:8, 0:4]
+            hashSuma = hashSum(slicedCard)
+            sliced = True
+        if sliced == True:
+            if hashSuma == 11:
+                hashSuma = hashSum(card)
+                #Номинал без учета slice
+            #Номинал с учетом slice
+        else:
+            #Номинал без учета slice
+            pass
+    else:
+        pass
+    cardNominal = 'A'
+    suitPixel = px[x_+10, 265][1]
+    if suitPixel == 17:
+        suit = 'h'
+    elif suitPixel == 134:
+        suit = 'c'
+    elif suitPixel == 77:
+        suit = 'd'
+    else:
+        suit = 's'
+    print(card, hashSuma, suitPixel)
+    return cardNominal+suit
+
+
 #До Игры
 def blind():
     return float(input('Blind: '))
@@ -64,26 +128,16 @@ def position():
         return 'Blind'
     return 'EP'
 def startHand():
-    preFlopDesk = cv2.imread('fromWindow/scad3.png', cv2.IMREAD_GRAYSCALE)
-    x = 470
-    y = 259
-    x_ = 491
-    y_ = 280
-    #x = 373
-    #y = 462
-    #x_ = 394
-    #y_ = 483
-    thresh = 128
-    firstCard = preFlopDesk[y:y_, x:x_]
-    firstCard = cv2.resize(firstCard, (8, 8))
-    firstCard = cv2.threshold(firstCard, thresh, 255, cv2.THRESH_BINARY)[1]
-    hashSum = 0
-    for line in firstCard:
-        for column in line:
-            if column == 255:
-                hashSum += 1
-    print(hashSum)
-    print(firstCard)
+    returnCards = ''
+    boardCards = cv2.imread('fromWindow/scad4.png', cv2.IMREAD_GRAYSCALE)
+    boardCardsSuit = Image.open('fromWindow/scad5.png')
+    x = 373
+    y = 461
+    x_ = 392
+    y_ = 480
+    for i in range(2):
+        returnCards += checkBoardCard(x + 46*i, y - 4*i, x_ + 46*i, y_ - 4*i, boardCards, boardCardsSuit, True)
+    return returnCards
 
 #Флоп
 def flopCards():
@@ -92,4 +146,23 @@ def flopCards():
 #Терн и ривер
 def ternRiverCard():
     return input('New card: ')
-startHand()
+def newCard(stage):
+    returnCards = ''
+    boardCards = cv2.imread('fromWindow/scad1.png', cv2.IMREAD_GRAYSCALE)
+    boardCardsSuit = Image.open('fromWindow/scad1.png')
+    x = 253
+    y = 258
+    x_ = 272
+    y_ = 277
+    plusPixels = 72
+    if stage == 'Flop':
+        for i in range(3):
+            returnCards += checkBoardCard(x + plusPixels*i, y, x_ + plusPixels*i, y_, boardCards, boardCardsSuit)
+    elif stage == 'Tern':
+        returnCards += checkBoardCard(x + plusPixels*3, y, x_ + plusPixels*3, y_, boardCards, boardCardsSuit)
+    else:
+        returnCards += checkBoardCard(x + plusPixels*4, y, x_ + plusPixels*4, y_, boardCards, boardCardsSuit)
+    return returnCards
+    
+
+print(startHand())
