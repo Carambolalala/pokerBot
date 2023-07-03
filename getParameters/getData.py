@@ -119,19 +119,6 @@ def checkHandCard(x, y, x_, y_, handCards, handCardsSuit):
         else:
             suits.append('c')
             retrunCards += 'c'
-        #if i == 0:
-         #   if hashSums[i] == 26 or hashSums[i] == 35:
-          #      slicedCard = cards[i][0:8, 0:2]
-           #     print(slicedCard)
-            #    hashSums[i] = hashSum(slicedCard)
-        #else:
-         #   if hashSums[i] == 33 or hashSums[i] == 34 or hashSums[i] == 35 or hashSums[i] == 36:
-          #      slicedCard = cards[i][0:8, 0:2]
-           #     print(slicedCard)
-            #    hashSums[i] = hashSum(slicedCard)
-             #   pass
-    for i in range(2):
-        pass
     return retrunCards, cards, hashSums
 
 #До Игры
@@ -194,27 +181,24 @@ def position():
         return 'Blind'
     return 'EP'
 def startHand():
-    for i in range(25, 40):
-        screen(i) #ченуть, куда сохранит скрин
-        sleep(0.5)
-        try:
-            print('spoq ' + str(i))
-            handCards = cv2.imread('spoq' + str(i) + '.png', cv2.IMREAD_GRAYSCALE)
-            handCardsSuit = Image.open('spoq' + str(i) + '.png')
-            x = 367
-            y = 450
-            x_ = 485
-            y_ = 499
-            returnCards, cards, hashSums = checkHandCard(x, y, x_, y_, handCards, handCardsSuit)
-            for i in range(2):
-                print(cards[i])
+    try:
+        print('spoq ' + str(i))
+        handCards = cv2.imread('spoq' + str(i) + '.png', cv2.IMREAD_GRAYSCALE)
+        handCardsSuit = Image.open('spoq' + str(i) + '.png')
+        x = 367
+        y = 450
+        x_ = 485
+        y_ = 499
+        returnCards, cards, hashSums = checkHandCard(x, y, x_, y_, handCards, handCardsSuit)
+        for i in range(2):
+            print(cards[i])
             print(returnCards)
-        except KeyError:
-            for i in range(2):
-                print(cards[i])
-            for i in range(2):
-                print(hashSums[i])
-            print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    except KeyError:
+        for i in range(2):
+            print(cards[i])
+        for i in range(2):
+            print(hashSums[i])
+        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
 #Флоп
 def flopCards():
@@ -241,5 +225,4 @@ def newCard(stage):
         returnCards += checkBoardCard(x + plusPixels*4, y, x_ + plusPixels*4, y_, boardCards, boardCardsSuit)
     return returnCards
     
-
 startHand()
